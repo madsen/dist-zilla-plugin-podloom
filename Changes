@@ -1,6 +1,6 @@
 Revision history for Dist::Zilla::Plugin::PodLoom
 
-0.08   NOT
+0.08   April 14, 2010
 	- No longer distributed in Dist-Zilla-PluginBundle-CJM
 
 ----------------------------------------------------------------------
