@@ -1,14 +1,8 @@
-Dist-Zilla-PluginBundle-CJM version {{$version}}, released {{$date}}
+Dist::Zilla::Plugin::PodLoom version {{$version}}, released {{$date}}
 
 
-Dist-Zilla-PluginBundle-CJM is a collection of plugins I've written
-for Dist::Zilla.  There isn't actually a @CJM bundle yet, because I'm
-still working out how I want to use Dist::Zilla.
-
-I've written some other plugins that are distributed separately,
-because they had different prerequisites.  The ones collected here
-have fairly simple prerequisites, and I didn't want to have to make
-separate distributions for all of them.
+Dist::Zilla::Plugin::PodLoom is a plugin for Dist::Zilla that
+processes your documentation through Pod::Loom.
 
 
 
@@ -16,10 +10,7 @@ INSTALLATION
 
 To install these modules, run the following commands:
 
-    perl Makefile.PL
-    make
-    make test
-    make install
+{{ $t->build_instructions('    ') }}
 
 
 
@@ -30,7 +21,7 @@ DEPENDENCIES
 
 
 CHANGES
-    Here's what's new in version {{$version}} of Dist-Zilla-PluginBundle-CJM:
+    Here's what's new in version {{$version}} of Dist::Zilla::Plugin::PodLoom:
     (See the file "Changes" for the full revision history.)
 
 {{$changes}}

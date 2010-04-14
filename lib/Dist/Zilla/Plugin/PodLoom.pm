@@ -17,7 +17,7 @@ package Dist::Zilla::Plugin::PodLoom;
 # ABSTRACT: Process module documentation through Pod::Loom
 #---------------------------------------------------------------------
 
-our $VERSION = '0.05';
+our $VERSION = '0.08';
 # This file is part of {{$dist}} {{$dist_version}} ({{$date}})
 
 =head1 SYNOPSIS

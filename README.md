@@ -1,18 +1,14 @@
-Dist-Zilla-PluginBundle-CJM
-===========================
+Dist::Zilla::Plugin::PodLoom
+============================
 
-Dist-Zilla-PluginBundle-CJM is a collection of plugins I've written
-for Dist::Zilla.  There isn't actually a @CJM bundle yet, because I'm
-still working out how I want to use Dist::Zilla.
+Dist::Zilla::Plugin::PodLoom is a plugin for
+[Dist::Zilla](http://search.cpan.org/dist/Dist-Zilla/)
+that processes your documentation through
+[Pod::Loom](http://search.cpan.org/dist/Pod-Loom/).
 
-I've written some other plugins that are distributed separately,
-because they had different prerequisites.  The ones collected here
-have fairly simple prerequisites, and I didn't want to have to make
-separate distributions for all of them.
-
-This is a Git repository where development of Dist-Zilla-PluginBundle-CJM
+This is a Git repository where development of Dist::Zilla::Plugin::PodLoom
 takes place.  For more information, visit
-[Dist-Zilla-PluginBundle-CJM on CPAN](http://search.cpan.org/dist/Dist-Zilla-PluginBundle-CJM/).
+[Dist-Zilla-Plugin-PodLoom on CPAN](http://search.cpan.org/dist/Dist-Zilla-Plugin-PodLoom/).
 
 
 

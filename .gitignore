@@ -2,5 +2,5 @@
 /.build/
 Makefile
 /pm_to_blib
-Dist-Zilla-PluginBundle-CJM-*.tar.gz
-Dist-Zilla-PluginBundle-CJM-*/
+Dist-Zilla-Plugin-PodLoom-*.tar.gz
+Dist-Zilla-Plugin-PodLoom-*/
