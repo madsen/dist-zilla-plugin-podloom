@@ -1,5 +1,8 @@
 Revision history for Dist::Zilla::Plugin::PodLoom
 
+3.00   NOT
+	- Now compatible with (and requires) Dist::Zilla 3
+
 0.08   April 14, 2010
 	- No longer distributed in Dist-Zilla-PluginBundle-CJM
 
