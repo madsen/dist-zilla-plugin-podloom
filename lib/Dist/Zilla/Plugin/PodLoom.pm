@@ -17,7 +17,7 @@ package Dist::Zilla::Plugin::PodLoom;
 # ABSTRACT: Process module documentation through Pod::Loom
 #---------------------------------------------------------------------
 
-our $VERSION = '3.00';
+our $VERSION = '3.01';
 # This file is part of {{$dist}} {{$dist_version}} ({{$date}})
 
 =head1 SYNOPSIS
@@ -92,7 +92,8 @@ The primary package of the file being processed
 
 =item repository
 
-C<< $zilla->distmeta->{resources}{repository}{url} >>
+C<< $zilla->distmeta->{resources}{repository}{web} >>
+(or the C<url> key if C<web> is not set)
 
 =item version
 
@@ -161,6 +162,7 @@ sub munge_file
   my $info = $self->get_module_info($file);
 
   my $abstract = Dist::Zilla::Util->abstract_from_file($file->name);
+  my $repo     = $self->zilla->distmeta->{resources}{repository};
 
   my $dataHash = Hash::Merge::Simple::merge(
     {
@@ -169,7 +171,7 @@ sub munge_file
       dist           => $self->zilla->name,
       license_notice => $self->zilla->license->notice,
       ($info->name ? (module => $info->name) : ()),
-      repository     => $self->zilla->distmeta->{resources}{repository}{url},
+      repository     => $repo->{web} || $repo->{url},
       # Have to stringify version object:
       ($info->version ? (version => q{} . $info->version) : ()),
       zilla          => $self->zilla,

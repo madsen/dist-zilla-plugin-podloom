@@ -1,5 +1,8 @@
 Revision history for Dist::Zilla::Plugin::PodLoom
 
+3.01   NOT
+	- For repository, prefer the 'web' key to the 'url' key
+
 3.00   May 22, 2010
 	- Now compatible with (and requires) Dist::Zilla 3
 
