@@ -17,7 +17,7 @@ package Dist::Zilla::Plugin::PodLoom;
 # ABSTRACT: Process module documentation through Pod::Loom
 #---------------------------------------------------------------------
 
-our $VERSION = '3.01';
+our $VERSION = '3.02';
 # This file is part of {{$dist}} {{$dist_version}} ({{$date}})
 
 =head1 SYNOPSIS
@@ -185,6 +185,17 @@ sub munge_file
   return;
 } # end munge_file
 
+#---------------------------------------------------------------------
+around dump_config => sub {
+  my ($orig, $self) = @_;
+  my $config = $self->$orig;
+
+  $config->{'Pod::Loom version'} = Pod::Loom->VERSION;
+
+  return $config;
+}; # end dump_config
+
+#---------------------------------------------------------------------
 no Moose;
 __PACKAGE__->meta->make_immutable;
 1;

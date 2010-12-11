@@ -1,5 +1,8 @@
 Revision history for Dist::Zilla::Plugin::PodLoom
 
+3.02   NOT
+	- Added dump_config method to list Pod::Loom version
+
 3.01   December 1, 2010
 	- For repository, prefer the 'web' key to the 'url' key
 
