@@ -17,7 +17,7 @@ package Dist::Zilla::Plugin::PodLoom;
 # ABSTRACT: Process module documentation through Pod::Loom
 #---------------------------------------------------------------------
 
-our $VERSION = '3.02';
+our $VERSION = '4.00';
 # This file is part of {{$dist}} {{$dist_version}} ({{$date}})
 
 =head1 SYNOPSIS
@@ -161,7 +161,7 @@ sub munge_file
 
   my $info = $self->get_module_info($file);
 
-  my $abstract = Dist::Zilla::Util->abstract_from_file($file->name);
+  my $abstract = Dist::Zilla::Util->abstract_from_file($file);
   my $repo     = $self->zilla->distmeta->{resources}{repository};
 
   my $dataHash = Hash::Merge::Simple::merge(

@@ -1,5 +1,8 @@
 Revision history for Dist::Zilla::Plugin::PodLoom
 
+4.00   NOT
+	- Fix compatibility with (and require) Dist::Zilla 4.200001+
+
 3.02   December 11, 2010
 	- List Pod::Loom version in dumped config
 	- Require latest Pod::Loom (0.04)
