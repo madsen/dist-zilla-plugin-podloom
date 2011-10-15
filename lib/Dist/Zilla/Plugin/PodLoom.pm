@@ -17,7 +17,7 @@ package Dist::Zilla::Plugin::PodLoom;
 # ABSTRACT: Process module documentation through Pod::Loom
 #---------------------------------------------------------------------
 
-our $VERSION = '4.00';
+our $VERSION = '4.01';
 # This file is part of {{$dist}} {{$dist_version}} ({{$date}})
 
 =head1 SYNOPSIS
@@ -171,6 +171,7 @@ sub munge_file
       dist           => $self->zilla->name,
       license_notice => $self->zilla->license->notice,
       ($info->name ? (module => $info->name) : ()),
+      bugtracker     => $self->zilla->distmeta->{resources}{bugtracker},
       repository     => $repo->{web} || $repo->{url},
       # Have to stringify version object:
       ($info->version ? (version => q{} . $info->version) : ()),

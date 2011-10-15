@@ -1,5 +1,8 @@
 Revision history for Dist::Zilla::Plugin::PodLoom
 
+4.01   NOT
+	- Support custom bugtracker (require Pod::Loom 0.05)
+
 4.00   May 5, 2011
 	- Fix compatibility with (and require) Dist::Zilla 4.200001+
 
