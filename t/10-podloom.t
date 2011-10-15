@@ -12,7 +12,7 @@ use utf8;
 
 use Test::More 0.88;  # want done_testing
 
-use Dist::Zilla::Tester qw(Builder);
+use Dist::Zilla::Tester 4.200001 qw(Builder); # abstract_from_file change
 use Encode qw(decode);
 
 # Load Test::Differences, if available:

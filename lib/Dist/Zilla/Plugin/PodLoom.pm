@@ -35,13 +35,18 @@ under F<lib> or in the root directory through Pod::Loom.
 
 =cut
 
-use Moose;
+use Moose 0.65; # attr fulfills requires
 #use Moose::Autobox;
 with qw(Dist::Zilla::Role::FileMunger
         Dist::Zilla::Role::ModuleInfo);
 
+# List minimum versions for AutoPrereqs:
+use 5.008;
+use Dist::Zilla 4.200001 ();               # abstract_from_file change
+use Dist::Zilla::Role::ModuleInfo 0.08 (); # from Plugins, not PluginBundle
+
 use Hash::Merge::Simple ();
-use Pod::Loom ();
+use Pod::Loom 0.05 (); # bugtracker
 
 =attr template
 
