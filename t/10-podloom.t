@@ -12,7 +12,7 @@ use utf8;
 
 use Test::More 0.88;  # want done_testing
 
-use Dist::Zilla::Tester 4.200001 qw(Builder); # abstract_from_file change
+use Test::DZil qw(Builder);
 use Encode qw(decode);
 
 # Load Test::Differences, if available:
@@ -78,7 +78,7 @@ END EXPECTED
 
 #=====================================================================
 {
-  my $tzil = Dist::Zilla::Tester->from_config(
+  my $tzil = Builder->from_config(
     { dist_root => 'corpus/DZT' },
   );
 
