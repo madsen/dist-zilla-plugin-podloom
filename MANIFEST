@@ -10,6 +10,7 @@ corpus/DZT/lib/DZT/Sample.pm
 corpus/DZT/loom.pl
 corpus/README
 lib/Dist/Zilla/Plugin/PodLoom.pm
+t/00-all_prereqs.t
 t/00-compile.t
 t/10-podloom.t
 t/release-pod-coverage.t
