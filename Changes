@@ -1,6 +1,6 @@
 Revision history for Dist::Zilla::Plugin::PodLoom
 
-4.10   NOT
+4.10   December 12, 2011
 	*** POTENTIALLY INCOMPATIBLE CHANGE ***
 	- PodLoom is now a FileFinderUser (defaulting to :InstallModules)
 
