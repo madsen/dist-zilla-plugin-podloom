@@ -1,5 +1,13 @@
 Revision history for Dist::Zilla::Plugin::PodLoom
 
+4.10   NOT
+	*** POTENTIALLY INCOMPATIBLE CHANGE ***
+	- PodLoom is now a FileFinderUser (defaulting to :InstallModules)
+
+	  In most cases, this should not be an issue, but if you had
+	  modules in the root directory, they won't be processed by
+	  PodLoom anymore unless you override :InstallModules.
+
 4.01   October 15, 2011
 	- Support custom bugtracker (require Pod::Loom 0.05)
 

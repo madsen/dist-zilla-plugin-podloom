@@ -17,7 +17,7 @@ package Dist::Zilla::Plugin::PodLoom;
 # ABSTRACT: Process module documentation through Pod::Loom
 #---------------------------------------------------------------------
 
-our $VERSION = '4.01';
+our $VERSION = '4.10';
 # This file is part of {{$dist}} {{$dist_version}} ({{$date}})
 
 =head1 SYNOPSIS
@@ -36,9 +36,13 @@ under F<lib> or in the root directory through Pod::Loom.
 =cut
 
 use Moose 0.65; # attr fulfills requires
-#use Moose::Autobox;
-with qw(Dist::Zilla::Role::FileMunger
-        Dist::Zilla::Role::ModuleInfo);
+use Moose::Autobox;
+with(qw(Dist::Zilla::Role::FileMunger
+        Dist::Zilla::Role::ModuleInfo
+        Dist::Zilla::Role::FileFinderUser) => {
+          default_finders => [ ':InstallModules' ],
+        },
+);
 
 # List minimum versions for AutoPrereqs:
 use 5.008;
@@ -47,6 +51,12 @@ use Dist::Zilla::Role::ModuleInfo 0.08 (); # from Plugins, not PluginBundle
 
 use Hash::Merge::Simple ();
 use Pod::Loom 0.05 (); # bugtracker
+
+=attr finder
+
+This is the name of a L<FileFinder|Dist::Zilla::Role::FileFinder>
+whose files will be processed by L<Pod::Loom>.  It may be specified
+multiple times.  The default value is C<:InstallModules>.
 
 =attr template
 
@@ -157,12 +167,16 @@ sub _initialize_data
 } # end _initialize_data
 
 #---------------------------------------------------------------------
+sub munge_files {
+  my ($self) = @_;
+
+  $self->munge_file($_) for $self->found_files->flatten;
+} # end munge_files
+
+#---------------------------------------------------------------------
 sub munge_file
 {
   my ($self, $file) = @_;
-
-  return unless $file->name =~ /\.(?:pm|pod)$/i
-            and ($file->name !~ m{/} or $file->name =~ m{^lib/});
 
   my $info = $self->get_module_info($file);
 
@@ -212,4 +226,4 @@ __END__
 CONFIGURATION AND ENVIRONMENT
 
 =for Pod::Coverage
-munge_file
+munge_files?
