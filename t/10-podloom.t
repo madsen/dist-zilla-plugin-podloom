@@ -15,8 +15,9 @@ use Test::More 0.88;  # want done_testing
 use Test::DZil qw(Builder);
 use Encode qw(decode);
 
-# Load Test::Differences, if available:
+# Load Test::Differences, if available (better output for failures):
 BEGIN {
+  # SUGGEST PREREQ: Test::Differences
   if (eval "use Test::Differences; 1") {
     # Not all versions of Test::Differences support changing the style:
     eval { Test::Differences::unified_diff() }
