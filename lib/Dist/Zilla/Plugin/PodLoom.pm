@@ -17,7 +17,7 @@ package Dist::Zilla::Plugin::PodLoom;
 # ABSTRACT: Process module documentation through Pod::Loom
 #---------------------------------------------------------------------
 
-our $VERSION = '4.10';
+our $VERSION = '5.00';
 # This file is part of {{$dist}} {{$dist_version}} ({{$date}})
 
 =head1 SYNOPSIS
@@ -198,9 +198,11 @@ sub munge_file
     }, $self->data,
   );
 
-  my $content = $file->content;
+  my $method = Dist::Zilla->VERSION < 5 ? 'content' : 'encoded_content';
 
-  $file->content( $self->loom->weave(\$content, $file->name, $dataHash) );
+  my $content = $file->$method;
+
+  $file->$method( $self->loom->weave(\$content, $file->name, $dataHash) );
 
   return;
 } # end munge_file

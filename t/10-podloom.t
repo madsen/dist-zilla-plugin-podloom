@@ -85,7 +85,8 @@ END EXPECTED
   $tzil->build;
   ok(1, 'built ok') unless $generateResults;
 
-  my $got = decode('utf8', $tzil->slurp_file('build/lib/DZT/Sample.pm'));
+  my $got = $tzil->slurp_file('build/lib/DZT/Sample.pm');
+  $got = decode('utf8', $got) if Dist::Zilla->VERSION < 5;
 
   $got =~ s/\n(?:[ \t]*\n)+/\n\n/g; # Normalize blank lines
 

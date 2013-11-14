@@ -1,5 +1,9 @@
 Revision history for Dist::Zilla::Plugin::PodLoom
 
+5.00   NOT
+	- Now compatible with Dist::Zilla 5 (but still works with 4)
+	  Fixes RT#90330. (Thanks, Andreas Koenig.)
+
 4.10   2011-12-12
 	*** POTENTIALLY INCOMPATIBLE CHANGE ***
 	- PodLoom is now a FileFinderUser (defaulting to :InstallModules)
