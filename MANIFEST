@@ -13,5 +13,5 @@ lib/Dist/Zilla/Plugin/PodLoom.pm
 t/00-all_prereqs.t
 t/00-compile.t
 t/10-podloom.t
-t/release-pod-coverage.t
-t/release-pod-syntax.t
+xt/release/pod-coverage.t
+xt/release/pod-syntax.t
