@@ -1,5 +1,9 @@
 Revision history for Dist::Zilla::Plugin::PodLoom
 
+5.001  NOT
+	- When passing 'module' to Pod::Loom, use the filename if the
+	  package is 'main' or undetermined.  This makes it useful for scripts.
+
 5.00   2013-11-13
 	- Now compatible with Dist::Zilla 5 (but still works with 4)
 	  Fixes RT#90330. (Thanks, Andreas Koenig.)

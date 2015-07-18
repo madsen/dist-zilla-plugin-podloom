@@ -17,7 +17,7 @@ package Dist::Zilla::Plugin::PodLoom;
 # ABSTRACT: Process module documentation through Pod::Loom
 #---------------------------------------------------------------------
 
-our $VERSION = '5.00';
+our $VERSION = '5.001';
 # This file is part of {{$dist}} {{$dist_version}} ({{$date}})
 
 =head1 SYNOPSIS
@@ -102,8 +102,10 @@ C<< $zilla->license->notice >>
 
 =item module
 
-The primary package of the file being processed
-(if Module::Build::ModuleInfo could determine it)
+The primary package of the file being processed.  If Module::Metadata
+could not determine the package, or if it is explicitly C<main>, this
+is the filename (without directories), because that's the equivalent
+of a package name for scripts.
 
 =item repository
 
@@ -113,7 +115,7 @@ C<< $zilla->distmeta->{resources}{repository}{web} >>
 =item version
 
 The version number of the file being processed
-(if Module::Build::ModuleInfo could determine it)
+(if Module::Metadata could determine it)
 
 =item zilla
 
@@ -183,13 +185,19 @@ sub munge_file
   my $abstract = Dist::Zilla::Util->abstract_from_file($file);
   my $repo     = $self->zilla->distmeta->{resources}{repository};
 
+  my $module = $info->name;
+  if (!$module or $module eq 'main') {
+    $module = $file->name;
+    $module =~ s!^.*/!!s;       # Strip directory names
+  }
+
   my $dataHash = Hash::Merge::Simple::merge(
     {
       ($abstract ? (abstract => $abstract) : ()),
       authors        => $self->zilla->authors,
       dist           => $self->zilla->name,
       license_notice => $self->zilla->license->notice,
-      ($info->name ? (module => $info->name) : ()),
+      module         => $module,
       bugtracker     => $self->zilla->distmeta->{resources}{bugtracker},
       repository     => $repo->{web} || $repo->{url},
       # Have to stringify version object:
