@@ -33,13 +33,15 @@ if (@ARGV and $ARGV[0] eq 'gen') {
   # Just output the actual results, so they can be diffed against this file
   $generateResults = 1;
   open(OUT, '>:utf8', '/tmp/10-podloom.t') or die $!;
-  printf OUT "#%s\nmy \$expected = <<'END EXPECTED';\n", '=' x 69;
+  printf OUT "#%s\nmy %%expected;\n", '=' x 69;
 } else {
-  plan tests => 2;
+  plan tests => 3;
 }
 
 #=====================================================================
-my $expected = <<'END EXPECTED';
+my %expected;
+
+$expected{'module'} = <<'END EXPECTED MODULE';
 package DZT::Sample;
 # ABSTRACT: Sample DZ Dist
 
@@ -75,9 +77,67 @@ DZT::Sample requires ümlauts.
 E. Xavier Ample  S<C<< <example AT example.org> >>>
 
 =cut
-END EXPECTED
+END EXPECTED MODULE
+
+$expected{'script'} = <<'END EXPECTED SCRIPT';
+#! /usr/bin/perl
+
+# ABSTRACT: Sample DZ script
+
+use strict;
+use warnings;
+
+use DZT::Sample;
+
+our $VERSION = '0.04';
+
+print "Hello, world!\n";
+
+__END__
+
+=head1 NAME
+
+script - Sample DZ script
+
+=head1 VERSION
+
+This is the version section.
+
+=head1 SYNOPSIS
+
+  script [FILE]...
+
+=head1 CONFIGURATION AND ENVIRONMENT
+
+script requires no configuration files or environment variables.
+
+=head1 AUTHOR
+
+E. Xavier Ample  S<C<< <example AT example.org> >>>
+
+=cut
+END EXPECTED SCRIPT
 
 #=====================================================================
+sub check_file
+{
+  my ($tzil, $name, $path) = @_;
+
+  local $Test::Builder::Level = $Test::Builder::Level + 1;
+
+  my $got = $tzil->slurp_file($path);
+  $got = decode('utf8', $got) if Dist::Zilla->VERSION < 5;
+
+  $got =~ s/\n(?:[ \t]*\n)+/\n\n/g; # Normalize blank lines
+
+  if ($generateResults) {
+    printf OUT ("\n\$expected{'%s'} = <<'END EXPECTED %s';\n%sEND EXPECTED %s\n",
+                $name, uc($name), $got, uc($name));
+  } else {
+    eq_or_diff($got, $expected{$name}, "expected $name content");
+  }
+} # end check_file
+
 {
   my $tzil = Builder->from_config(
     { dist_root => 'corpus/DZT' },
@@ -86,19 +146,17 @@ END EXPECTED
   $tzil->build;
   ok(1, 'built ok') unless $generateResults;
 
-  my $got = $tzil->slurp_file('build/lib/DZT/Sample.pm');
-  $got = decode('utf8', $got) if Dist::Zilla->VERSION < 5;
+  #printf STDERR "\n# %s\n", $tzil->root; $_ = <STDIN>;
 
-  $got =~ s/\n(?:[ \t]*\n)+/\n\n/g; # Normalize blank lines
-
-  if ($generateResults) {
-    print OUT $got . "END EXPECTED\n";
-  } else {
-    eq_or_diff($got, $expected, 'expected content');
-  }
+  check_file($tzil, module => 'build/lib/DZT/Sample.pm');
+  check_file($tzil, script => 'build/bin/script');
 }
 
-done_testing unless $generateResults;
+if ($generateResults) {
+  printf OUT "\n#%s\n", '=' x 69;
+} else {
+  done_testing;
+}
 
 # Local Variables:
 # compile-command: "cd .. && perl t/10-podloom.t gen"

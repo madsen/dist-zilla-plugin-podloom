@@ -5,6 +5,7 @@ META.json
 META.yml
 Makefile.PL
 README
+corpus/DZT/bin/script
 corpus/DZT/dist.ini
 corpus/DZT/lib/DZT/Sample.pm
 corpus/DZT/loom.pl
