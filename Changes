@@ -1,6 +1,6 @@
 Revision history for Dist::Zilla::Plugin::PodLoom
 
-5.001  NOT
+5.001  2015-07-18
 	- When passing 'module' to Pod::Loom, use the filename if the
 	  package is 'main' or undetermined.  This makes it useful for scripts.
 
